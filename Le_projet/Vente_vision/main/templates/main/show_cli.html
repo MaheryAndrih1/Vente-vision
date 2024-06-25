@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% block title %}test show clients{% endblock %}
+{% block content %}
+<div class="container">
+    {% for x in obj %}
+    <div class="row">
+        <div class="col-mg-5 col-md-5 col-12">
+            {{x.name}}
+        </div>
+        <div class="col-mg-5 col-md-5 col-12">
+            {{x.des}}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

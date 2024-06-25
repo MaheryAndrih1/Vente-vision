@@ -1,0 +1,65 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Login{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <script>
+        window.location.replace("{% url 'home' %}");
+    </script>
+{% else %}
+<section class="background-radial-gradient overflow-hidden">
+    <button type="button" class="btn btn-light position-absolute mt-3 ms-3" onclick="window.location.href = '{% url 'Accueil' %}';">
+        <i class="bi bi-arrow-left-circle"></i>
+    </button>
+    
+    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card bg-glass" style="max-width: 450px; width: 100%;">
+            <div class="card-body px-4 py-5 px-md-5">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+                    <!-- Checkbox -->
+                    <div class="form-check d-flex justify-content-center mb-4">
+                        <input class="form-check-input me-2" type="checkbox" value="" id="loginRemember" />
+                        <label class="form-check-label" for="loginRemember">
+                            Se souvenir de moi
+                        </label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="d-grid gap-2 my-4">
+                        <button type="submit" class="btn btn-primary">
+                            Se connecter
+                        </button>
+                    </div>
+
+                    <p>N'a pas encore de compte, créer un <a href="{% url 'sign-up' %}">ici</a>!</p>
+
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                        <p>ou se connecter avec :</p>
+                        <button type="button" class="btn btn-link btn-floating mx-1">
+                            <i class="bi bi-facebook"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-link btn-floating mx-1">
+                            <i class="bi bi-google"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-link btn-floating mx-1">
+                            <i class="bi bi-twitter"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-link btn-floating mx-1">
+                            <i class="bi bi-github"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
